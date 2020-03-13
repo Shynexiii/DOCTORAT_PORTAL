@@ -1,3 +1,23 @@
+## License
+
+<p>1st - Clone the project</p>
+<p>2nd - composer install</p>
+<p>3th - npm install</p>
+<p>4th - npm run dev</p>
+<p>5th - php artisan key:generate</p>
+<p>6th - configure the .env file:</p>
+<p>DB_DATABASE=YOUR DATABSE NAME</p>
+<p>DB_USERNAME=YOUR DATABASE USERNAME</p>
+<p>DB_PASSWORD=YOUR DATABASE PASSWORD</p>
+<p>7th - Make migration</p>
+<p>php artisan migrate</p>
+<p>8th - Seed the database</p>
+<p>php artisan db:seed</p>
+<p>Go to the login page and enter:</p>
+<p>Username = admin</p>
+<p>Password = 123456</p>
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
