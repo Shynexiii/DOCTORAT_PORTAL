@@ -1,4 +1,4 @@
-## License
+## Please read this
 
 <p>1st - Clone the project</p>
 <p>2nd - composer install</p>
