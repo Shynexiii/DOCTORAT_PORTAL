@@ -71,9 +71,9 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="info">
-          
+      <div class="user-panel mt-2 pb-1 mb-2 d-flex">
+        <div class="info text-uppercase font-weight-light text-light">
+            <span class="text-center">Administration</span>
         </div>
       </div>
 
@@ -82,6 +82,12 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item {{ (request()->is('examination*')) ? 'active' : '' }}">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Examination</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview {{ (request()->is('users*')) ? 'menu-open' : '' }} {{ (request()->is('roles*')) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -105,15 +111,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
