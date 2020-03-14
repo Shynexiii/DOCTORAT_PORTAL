@@ -41,6 +41,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('roles/{role}/edit', 'Backend\User\RoleController@edit')->name('roles.edit');
     Route::patch('roles/{role}', 'Backend\User\RoleController@update')->name('roles.update');
     Route::delete('roles/{role}', 'Backend\User\RoleController@destroy')->name('roles.delete');
+
+    //Role CRUD
+    Route::get('examinations', 'Backend\Examination\ExaminationController@index')->name('examinations.index');
+    Route::get('examinations/create', 'Backend\Examination\ExaminationController@create')->name('examinations.create');
+    Route::post('examinations/store', 'Backend\Examination\ExaminationController@store')->name('examinations.store');
+    Route::get('examinations/{examination}', 'Backend\Examination\ExaminationController@show')->name('examinations.show');
+    Route::get('examinations/{examination}/edit', 'Backend\Examination\ExaminationController@edit')->name('examinations.edit');
+    Route::patch('examinations/{examination}', 'Backend\Examination\ExaminationController@update')->name('examinations.update');
+    Route::delete('examinations/{examination}', 'Backend\Examination\ExaminationController@destroy')->name('examinations.delete');
     
     
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');
