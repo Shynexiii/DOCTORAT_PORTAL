@@ -5,6 +5,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Doctorat | Home</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -39,22 +40,12 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       @auth
-      <li class="nav-item dropdown">
-        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
-        </a>
-
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('logout') }}"
-               onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                {{ __('Logout') }}
-            </a>
-
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        </div>
+      <li class="nav-item ">
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button class="btn font-weight-light" type="submit">{{ __('Logout') }} <span class="fas fa-sign-out-alt "></span></button>
+            
+        </form>
       </li>
       @endauth
     </ul>
@@ -71,9 +62,12 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-2 pb-1 mb-2 d-flex">
-        <div class="info text-uppercase font-weight-light text-light">
-            <span class="text-center">Administration</span>
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <span class="text-uppercase" data-letters="{{ substr(Auth::user()->first_name,0 ,1)  }}{{ substr(Auth::user()->last_name,0 ,1)  }}"></span>
+        </div>
+        <div class="info">
+          <span class="font-weight-light text-light">{{Auth::user()->first_name}} {{Auth::user()->last_name}}</span>
         </div>
       </div>
 
