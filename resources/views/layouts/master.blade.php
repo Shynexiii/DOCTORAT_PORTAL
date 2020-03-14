@@ -39,10 +39,23 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       @auth
-          <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="btn">Logout</button>
-          </form>
+      <li class="nav-item dropdown">
+        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
+        </a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        </div>
+      </li>
       @endauth
     </ul>
   </nav>
@@ -59,11 +72,8 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ asset('images/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block">{{auth()->user()->first_name ?? ""}} {{auth()->user()->last_name ?? ""}}</a>
+          
         </div>
       </div>
 

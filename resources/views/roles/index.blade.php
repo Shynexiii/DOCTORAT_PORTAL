@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col">
-        <div class="card w-75 mx-auto">
+        <div class="card">
             <div class="card-header">
                 <a href="{{ route('roles.create') }}" class="btn btn-primary">Add a new role</a>
             </div>
@@ -11,9 +11,9 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>#id</th>
-                            <th>Name</th>
-                            <th>Action</th>
+                            <th style="width: 10%">#id</th>
+                            <th >Name</th>
+                            <th style="width: 15%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
