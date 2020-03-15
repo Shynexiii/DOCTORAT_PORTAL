@@ -43,7 +43,7 @@
       <li class="nav-item ">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
-            <button class="btn btn-light font-weight-light" type="button">{{ __('Logout') }} <span class="fas fa-sign-out-alt "></span></button>
+            <button class="btn font-weight-light" type="submit">{{ __('Logout') }} <span class="fas fa-sign-out-alt "></span></button>
             
         </form>
       </li>
