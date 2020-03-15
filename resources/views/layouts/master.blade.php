@@ -77,9 +77,9 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="{{route('examinations.index')}}" class="nav-link {{ (request()->is('examinations*')) ? 'active' : '' }}">
+            <a href="{{route('students.index')}}" class="nav-link {{ (request()->is('students*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-graduation-cap"></i>
-              <p>Examination</p>
+              <p>Students</p>
             </a>
           </li>
           <li class="nav-item has-treeview {{ (request()->is('users*')) ? 'menu-open' : '' }} {{ (request()->is('roles*')) ? 'menu-open' : '' }}">

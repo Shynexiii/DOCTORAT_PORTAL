@@ -42,14 +42,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('roles/{role}', 'Backend\User\RoleController@update')->name('roles.update');
     Route::delete('roles/{role}', 'Backend\User\RoleController@destroy')->name('roles.delete');
 
-    //Role CRUD
-    Route::get('examinations', 'Backend\Examination\ExaminationController@index')->name('examinations.index');
-    Route::get('examinations/create', 'Backend\Examination\ExaminationController@create')->name('examinations.create');
-    Route::post('examinations/store', 'Backend\Examination\ExaminationController@store')->name('examinations.store');
-    Route::get('examinations/{examination}', 'Backend\Examination\ExaminationController@show')->name('examinations.show');
-    Route::get('examinations/{examination}/edit', 'Backend\Examination\ExaminationController@edit')->name('examinations.edit');
-    Route::patch('examinations/{examination}', 'Backend\Examination\ExaminationController@update')->name('examinations.update');
-    Route::delete('examinations/{examination}', 'Backend\Examination\ExaminationController@destroy')->name('examinations.delete');
+    //Students CRUD
+    Route::get('students', 'Backend\Student\StudentController@index')->name('students.index');
+    Route::get('students/create', 'Backend\Student\StudentController@create')->name('students.create');
+    Route::post('students/store', 'Backend\Student\StudentController@store')->name('students.store');
+    Route::get('students/{student}', 'Backend\Student\StudentController@show')->name('students.show');
+    Route::get('students/{student}/edit', 'Backend\Student\StudentController@edit')->name('students.edit');
+    Route::patch('students/{student}', 'Backend\Student\StudentController@update')->name('students.update');
+    Route::delete('students/{student}', 'Backend\Student\StudentController@destroy')->name('students.delete');
     
     
     Route::post('logout', 'Auth\LoginController@logout')->name('logout');

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Backend\Examination;
+namespace App\Http\Controllers\backend\Student;
 
-use App\Examination;
 use App\Http\Controllers\Controller;
+use App\Student;
 use Illuminate\Http\Request;
 
-class ExaminationController extends Controller
+class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ExaminationController extends Controller
      */
     public function index()
     {
-        $examinations = Examination::paginate(15);
-        return view('examinations.index',compact('examinations'));
+        $students = Student::paginate(15);
+        return view('students.index',compact('students'));
     }
 
     /**
@@ -43,10 +43,10 @@ class ExaminationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Examination  $examination
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Examination $examination)
+    public function show(Student $student)
     {
         //
     }
@@ -54,10 +54,10 @@ class ExaminationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Examination  $examination
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit(Examination $examination)
+    public function edit(Student $student)
     {
         //
     }
@@ -66,10 +66,10 @@ class ExaminationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Examination  $examination
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Examination $examination)
+    public function update(Request $request, Student $student)
     {
         //
     }
@@ -77,10 +77,10 @@ class ExaminationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Examination  $examination
+     * @param  \App\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Examination $examination)
+    public function destroy(Student $student)
     {
         //
     }
