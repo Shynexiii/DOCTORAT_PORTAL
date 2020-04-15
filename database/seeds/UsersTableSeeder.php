@@ -50,6 +50,7 @@ class UsersTableSeeder extends Seeder
             'Date_Of_Birth' =>  '02/02/1992',
         ]);
 
+        
         $adminRole = Role::where('name','admin')->first();
         $codingRole = Role::where('name','coding')->first();
         $secretariatRole = Role::where('name','secretariat')->first();

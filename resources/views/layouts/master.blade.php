@@ -82,6 +82,12 @@
               <p>Students</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{route('teachers.index')}}" class="nav-link {{ (request()->is('teachers*')) ? 'active' : '' }}">
+              <i class="nav-icon far fa-edit"></i>
+              <p>Teachers</p>
+            </a>
+          </li>
           <li class="nav-item has-treeview {{ (request()->is('users*')) ? 'menu-open' : '' }} {{ (request()->is('roles*')) ? 'menu-open' : '' }}">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -104,6 +110,12 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('specialities.index')}}" class="nav-link {{ (request()->is('specialities*')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-university"></i>
+              <p>Specialities</p>
+            </a>
           </li>
           
         </ul>
@@ -138,6 +150,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md">
+            @include('inc.message')
             @yield('content')
           </div>
         </div>
@@ -160,6 +173,7 @@
 </div>
 
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
 
 </body>
 </html>

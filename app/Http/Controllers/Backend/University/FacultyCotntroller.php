@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\backend\User;
+namespace App\Http\Controllers\Backend\University;
 
+use App\Faculty;
 use App\Http\Controllers\Controller;
-use App\Role;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class FacultyCotntroller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate();
-        
-        return view('roles.index','roles');
+        //
     }
 
     /**
@@ -27,7 +25,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('roles.create');
+        //
     }
 
     /**
@@ -38,37 +36,27 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'name'    => ['required','unique:roles'],
-        ]);
-        
-        $data = array(
-            'name'    => request()->name,
-        );
-
-        $role = Role::create($data);
-        
-        return redirect()->route('roles.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Faculty $faculty)
     {
-        return view('roles.show',compact('role'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Faculty $faculty)
     {
         //
     }
@@ -77,10 +65,10 @@ class RoleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Role  $role
+     * @param  \App\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, Faculty $faculty)
     {
         //
     }
@@ -88,15 +76,11 @@ class RoleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Role  $role
+     * @param  \App\Faculty  $faculty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Faculty $faculty)
     {
-        $role->users()->detach();
-
-        $role->delete();
-
-        return redirect()->route('roles.index');
+        //
     }
 }

@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Role;
 use App\User;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -51,7 +54,7 @@ class UserController extends Controller
             'role'          => ['required'],
         ]);
         
-        $inputs = request()->all();
+        
         $data = array(
             'first_name'    => request()->first_name,
             'last_name'     => request()->last_name,
@@ -87,7 +90,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $roles = Role::all();
+        return view('users.edit', compact('user','roles'));
     }
 
     /**
@@ -99,7 +103,32 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $a = request()->validate([
+            'first_name'    => ['required'],
+            'last_name'     => ['required'],
+            'email'         => ['sometimes','email'],
+            'password'      => ['sometimes'],
+            'phone_number'  => ['required'],
+            'Date_Of_Birth' => ['required','date_format:d/m/Y'],
+            'role'          => ['required'],
+        ]);
+
+        $data = array(
+            'first_name'    => request()->first_name,
+            'last_name'     => request()->last_name,
+            'email'         => request()->email,
+            'password'      => Hash::make(request()->password),
+            'phone_number'  => request()->phone_number,
+            'Date_Of_Birth' => request()->Date_Of_Birth,
+        );
+
+        // $user = User::find($user->id);
+        // dd($user);
+        $user->update($data);
+        $user->roles()->sync(request()->role);
+        $user->username = strtolower(request()->first_name).".".$user->id;
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -116,4 +145,17 @@ class UserController extends Controller
 
         return redirect()->route('users.index');
     }
+
+    // public function export() 
+    // {
+    //     return Excel::download(new UsersExport, 'users.xlsx');
+    // }
+    
+    // public function import() 
+    // {
+    //     dd(request());
+    //     Excel::import(new UsersImport, request()->file('file'));
+        
+    //     return redirect('/')->with('success', 'All good!');
+    // }
 }
