@@ -37150,9 +37150,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\DOCTORAT_PORTAL\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\xampp\htdocs\DOCTORAT_PORTAL\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\DOCTORAT_PORTAL\resources\sass\custom.scss */"./resources/sass/custom.scss");
+__webpack_require__(/*! /opt/lampp/htdocs/DOCTORAT_PORTAL/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /opt/lampp/htdocs/DOCTORAT_PORTAL/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /opt/lampp/htdocs/DOCTORAT_PORTAL/resources/sass/custom.scss */"./resources/sass/custom.scss");
 
 
 /***/ })

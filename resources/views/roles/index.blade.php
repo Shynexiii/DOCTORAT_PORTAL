@@ -8,7 +8,7 @@
                 <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add a new role</a>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-striped data-table">
+                <table class="table table-bordered table-striped data-table" id="myTable">
                     <thead>
                         <tr>
                             <th style="width: 10%">#id</th>
