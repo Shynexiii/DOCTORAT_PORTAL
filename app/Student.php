@@ -31,7 +31,16 @@ class Student extends Model
         'last_year_graduate_average',		
         'master_thesis_note',		
         'speciality_requested_fr',	
-        'speciality_requested_ar',        
+        'speciality_requested_ar',
+        'module_1_note_1',
+        'module_1_note_2',
+        'module_1_note_3',
+        'module_2_note_1',
+        'module_2_note_2',
+        'module_2_note_3',
+        'module_1_status',
+        'module_2_status',
+        'moyenne_doctorat',   
     ];
     
     public function speciality(){

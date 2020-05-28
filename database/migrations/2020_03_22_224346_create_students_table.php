@@ -39,15 +39,17 @@ class CreateStudentsTable extends Migration
             $table->string('speciality_requested_fr')->nullable();
             $table->string('speciality_requested_ar')->nullable();
             $table->string('secrete_code')->nullable();
-            $table->string('module_1_note_1')->nullable();
-            $table->string('module_1_note_2')->nullable();
-            $table->string('module_1_note_3')->nullable();
-            $table->string('module_2_note_1')->nullable();
-            $table->string('module_2_note_2')->nullable();
-            $table->string('module_2_note_3')->nullable();
-            $table->string('note_final_module_1')->nullable();
-            $table->string('note_final_module_2')->nullable();
-            $table->string('moyenne_doctorat')->nullable();
+            $table->double('module_1_note_1',4,2)->nullable()->default(0);
+            $table->double('module_1_note_2',4,2)->nullable()->default(0);
+            $table->double('module_1_note_3',4,2)->nullable()->default(0);
+            $table->double('module_2_note_1',4,2)->nullable()->default(0);
+            $table->double('module_2_note_2',4,2)->nullable()->default(0);
+            $table->double('module_2_note_3',4,2)->nullable()->default(0);
+            $table->double('note_final_module_1',4,2)->nullable()->default(0);
+            $table->double('note_final_module_2',4,2)->nullable()->default(0);
+            $table->boolean('module_1_status')->default(0);
+            $table->boolean('module_2_status')->default(0);
+            $table->double('moyenne_doctorat',4,2)->nullable()->default(0);
             $table->timestamps();
         });
     }

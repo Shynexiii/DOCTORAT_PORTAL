@@ -44,6 +44,16 @@ class LoginController extends Controller
         return 'username';
     }
 
+    protected function redirectTo(){
+        if(Auth::user()->roles->pluck('name')->contains('admin')){
+            return '/home';
+        }elseif(Auth::user()->roles->pluck('name')->contains('coding')){
+            return '/students';
+        }elseif(Auth::user()->roles->pluck('name')->contains('secretariat')){
+            return '/notes';
+        }
+    }
+
     public function logout(){
         Session::flush();
         Auth::logout();

@@ -13,6 +13,7 @@
 
 //Auth::routes();
 Route::redirect('/', 'login');
+//Route::redirect('/logout', abort(404));
 
 Route::group(['middleware' => ['guest']], function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -20,11 +21,10 @@ Route::group(['middleware' => ['guest']], function () {
 
 });
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['can:admin']], function () {
     
     Route::get('home', 'Backend\HomeController@index')->name('home');
     Route::get('users/export', 'Backend\User\UserController@export')->name('users.export');
-    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
     Route::post('demo/import', 'DemoController@import')->name('demo.import');
     
     //User CRUD
@@ -42,13 +42,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('roles/create', 'Backend\User\RoleController@create')->name('roles.create');
     Route::post('roles/store', 'Backend\User\RoleController@store')->name('roles.store');
     Route::get('roles/{role}', 'Backend\User\RoleController@show')->name('roles.show');
-    Route::get('roles/{role}/edit', 'Backend\User\RoleController@edit')->name('roles.edit');
-    Route::patch('roles/{role}', 'Backend\User\RoleController@update')->name('roles.update');
-    Route::delete('roles/{role}', 'Backend\User\RoleController@destroy')->name('roles.delete');
+    Route::get('roles/{id}/edit', 'Backend\User\RoleController@edit')->name('roles.edit');
+    Route::patch('roles/{id}', 'Backend\User\RoleController@update')->name('roles.update');
+    Route::delete('roles/{id}', 'Backend\User\RoleController@destroy')->name('roles.delete');
 
     //Students CRUD
-
-    Route::get('students', 'Backend\Student\StudentController@index')->name('students.index');
+  
     Route::get('students/create', 'Backend\Student\StudentController@create')->name('students.create');
     Route::post('students/store', 'Backend\Student\StudentController@store')->name('students.store');
     Route::get('students/{student}', 'Backend\Student\StudentController@show')->name('students.show');
@@ -71,6 +70,25 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('specialities/{speciality}', 'Backend\University\SpecialityController@destroy')->name('specialities.delete');
 
     
+    
+});
+
+ Route::group(['middleware' => ['can:adminOrCoding']], function () {
+
+    Route::get('students', 'Backend\Student\StudentController@index')->name('students.index');
+});
+   
+Route::group(['middleware' => ['can:adminOrSecretariat']], function () {
+
+    //Note CRUD
+    Route::get('notes', 'Backend\Student\NoteController@index')->name('notes.index');
+    Route::get('notes/create', 'Backend\Student\NoteController@create')->name('notes.create');
+    Route::post('notes/store', 'Backend\Student\NoteController@store')->name('notes.store');
+    Route::get('notes/{note}', 'Backend\Student\NoteController@show')->name('notes.show');
+    Route::get('notes/{id}/edit', 'Backend\Student\NoteController@edit')->name('notes.edit');
+    Route::patch('notes/{id}', 'Backend\Student\NoteController@update')->name('notes.update');
+    Route::delete('notes/{note}', 'Backend\Student\NoteController@destroy')->name('notes.delete');
+
     //Teacher CRUD
     Route::get('teachers', 'Backend\Teacher\TeacherController@index')->name('teachers.index');
     Route::get('teachers/create', 'Backend\Teacher\TeacherController@create')->name('teachers.create');
@@ -79,14 +97,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('teachers/{teacher}/edit', 'Backend\Teacher\TeacherController@edit')->name('teachers.edit');
     Route::patch('teachers/{teacher}', 'Backend\Teacher\TeacherController@update')->name('teachers.update');
     Route::delete('teachers/{teacher}', 'Backend\Teacher\TeacherController@destroy')->name('teachers.delete');
-    
 
-
-    
 
 });
 
-    
+Route::group(['middleware' => ['can:all']], function () {
+    Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+});
+
     
 
 

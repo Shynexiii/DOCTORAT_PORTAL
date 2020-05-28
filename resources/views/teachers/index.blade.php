@@ -6,7 +6,7 @@
     <a href="{{ route('teachers.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add a new teacher</a>
         </div>
         <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="teachersTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Number</th>
@@ -36,13 +36,13 @@
                     @endforeach
                 </tbody>
             </table>            
-            <nav aria-label="Page navigation">
+            {{-- <nav aria-label="Page navigation">
                 <div class="my-3">
                     <ul class="pagination justify-content-end">
                         {{ $teachers->links() }}
                     </ul>
                 </div>
-            </nav>
+            </nav> --}}
         </div>
     </div>    
 @endsection

@@ -19,17 +19,17 @@ class UsersTableSeeder extends Seeder
         DB::table('role_user')->truncate();
         
         $admin = User::create([
-            'first_name'    =>  'Samuel',
-            'last_name'     =>  'Jackson Oliver',
-            'username'      =>  'admin',
-            'email'         =>  'admin@admin.com',
+            'first_name'    =>  $faker->firstName,
+            'last_name'     =>  $faker->lastName,
+            'username'      =>  $faker->userName,
+            'email'         =>  $faker->fafeEmail,
             'password'      =>  Hash::make('123456'),
-            'phone_number'  =>  '+2137854523',
-            'Date_Of_Birth'    =>  '01/01/1990',
+            'phone_number'  =>  $faker->e164PhoneNumber,
+            'Date_Of_Birth' =>  $faker->date($format = 'Y/m/d', $max = 'now'),
         ]);
 
         
-        $coding = User::create([
+        /* $coding = User::create([
             'first_name'    =>  'Paul',
             'last_name'     =>  'McCan',
             'username'      =>  'coding',
@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
         $admin->roles()->attach($adminRole);
         $coding->roles()->attach($codingRole);
         $secretariat->roles()->attach($secretariatRole);
-
+ */
 
     }
 }

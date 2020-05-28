@@ -9,12 +9,12 @@
             </div>
             
             <div class="card-body">
-                <table class="table table-bordered table-striped table-sm">
+                <table id="specialitiesTable" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
-                            <th style="width: 40%">Name</th>
-                            <th style="width: 30%">Number of students</th>
-                            <th style="width: 27%">Action</th>
+                            <th>Name</th>
+                            <th>Number of students</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,13 +34,6 @@
                         @endforeach
                     </tbody>
                 </table>            
-                <nav aria-label="Page navigation">
-                    <div class="my-3">
-                        <ul class="pagination justify-content-end">
-                            {{ $specialities->links() }}
-                        </ul>
-                    </div>
-                </nav>
             </div>
         </div>    
     </div>

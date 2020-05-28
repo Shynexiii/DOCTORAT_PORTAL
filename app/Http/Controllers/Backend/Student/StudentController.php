@@ -7,6 +7,7 @@ use App\Speciality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Imports\StudentsImport;
+use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -19,8 +20,30 @@ class StudentController extends Controller
      */
     public function index()
     {       
-        $students = Student::paginate(15);
-        return view('students.index',compact('students'));
+        if(request()->ajax()){
+            $data = Student::latest()->get();
+            return DataTables::of($data)
+            ->addColumn('action', function($data){
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary">Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger">Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        }
+        return view('students.index');
+    }
+    protected function getColumns()
+    {
+        return [
+            'register_number',
+            'first_name_fr',
+            'last_name_fr',
+            'speciality',
+            'secrete_code',
+            'action',
+        ];
     }
 
     /**

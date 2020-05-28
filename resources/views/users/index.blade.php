@@ -6,7 +6,7 @@
     <a href="{{ route('users.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add a new user</a>
         </div>
         <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="usersTable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -36,13 +36,7 @@
                     @endforeach
                 </tbody>
             </table>            
-            <nav aria-label="Page navigation">
-                <div class="my-3">
-                    <ul class="pagination justify-content-end">
-                        {{ $users->links() }}
-                    </ul>
-                </div>
-            </nav>
+            
         </div>
     </div>    
 @endsection

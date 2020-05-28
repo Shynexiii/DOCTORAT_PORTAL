@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\backend\User;
 
-use App\Http\Controllers\Controller;
 use App\Role;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class RoleController extends Controller
 {
@@ -15,9 +17,20 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(15);
+        if(request()->ajax()){
+            $data = Role::latest()->get();
+            return DataTables::of($data)
+            ->addColumn('action', function($data){
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary">Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger">Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+        }
         
-        return view('roles.index',compact('roles'));
+        return view('roles.index');
     }
 
     /**
@@ -38,17 +51,24 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
+        $rules = array(
             'name'    => ['required','unique:roles'],
-        ]);
+        );
         
+        $error = Validator::make($request->all(),
+        $rules);
+
+        if ($error->fails()) {
+            return response()->json(['error' => $error->errors()->all()]);
+        }
+
         $data = array(
-            'name'    => request()->name,
+            'name'    => $request->name,
         );
 
-        $role = Role::create($data);
+        Role::create($data);
         
-        return redirect()->route('roles.index');
+        return response()->json(['success' => 'Data added successfully.']);
     }
 
     /**
@@ -59,7 +79,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return view('roles.show',compact('role'));
+        
     }
 
     /**
@@ -68,9 +88,12 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        if(request()->ajax()){
+            $data = Role::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     /**
@@ -80,9 +103,25 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(Request $request, $id)
     {
-        //
+        $rules = array(
+            'name'    => ['required','unique:roles'],
+        );
+        
+        $error = Validator::make($request->all(), $rules);
+
+        if ($error->fails()) {
+            return response()->json(['error' => $error->errors()->all()]);
+        }
+
+        $data = array(
+            'name'    => $request->name,
+        );
+
+        Role::whereId($request->hidden_id)->update($data);
+        
+        return response()->json(['success' => 'Data is successfully updated.']);
     }
 
     /**
@@ -91,12 +130,12 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy($id)
     {
+        $role = Role::findOrFail($id);
+
         $role->users()->detach();
 
         $role->delete();
-
-        return redirect()->route('roles.index');
     }
 }

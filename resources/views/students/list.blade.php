@@ -4,26 +4,19 @@
 <div class="row">
     <div class="col">
         <div class="card">
-            <div class="card-header">  
-                <form action="{{ route('students.secrete_code') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Generate a secret code</button>
-                </form>
-            </div>
             
             <div class="card-body">
-                <table class="table table-bordered table-striped table-sm">
+                <table id="studentsListTable" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
-                            <th style="width: 11%">Registration number</th>
-                            <th style="width: 10%">First name</th>
-                            <th style="width: 10%">Last name</th>
-                            <th style="width: 10%">Date of Birth</th>
-                            <th style="width: 10%">Module 1</th>
-                            <th style="width: 10%">Module 2</th>
-                            <th style="width: 10%">Average</th>
-                            <th style="width: 10%">Secrete code</th>
-                            <th style="width: 17.5%">Notes</th>
+                            <th>Registration number</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Date of Birth</th>
+                            <th>Module 1</th>
+                            <th>Module 2</th>
+                            <th>Average</th>
+                            <th>Secrete code</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,20 +30,11 @@
                                 <td>{{ $student->note_final_module_2 }}</td>
                                 <td>{{ $student->moyenne_doctorat }}</td>
                                 <td>{{ $student->secrete_code }}</td>
-                                <td>
-                                <a href="{{ route('students.editModule1',['speciality'=>$student->speciality->id,'student'=>$student->id]) }}" class="btn btn-success">Module</a>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>            
-                <nav aria-label="Page navigation">
-                    <div class="my-3">
-                        <ul class="pagination justify-content-end">
-                            {{ $specialities->links() }}
-                        </ul>
-                    </div>
-                </nav>
+                
             </div>
         </div>    
     </div>

@@ -3,10 +3,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Doctorat | Home</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
   <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -18,15 +20,14 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
       </li>
+      @can('admin')
       <li class="nav-item d-none d-sm-inline-block">
         <a href="{{ route('home') }}" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+      @endcan
     </ul>
 
-    <!-- SEARCH FORM -->
+    {{-- <!-- SEARCH FORM -->
     <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -36,11 +37,11 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-      @auth
+      @canany(['admin','secretariat','coding'])
       <li class="nav-item ">
         <form action="{{ route('logout') }}" method="POST">
             @csrf
@@ -48,7 +49,7 @@
             
         </form>
       </li>
-      @endauth
+      @endcanany
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -56,10 +57,15 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{route('home')}}" class="brand-link">
-      <span class="brand-text font-weight-light">Doctorat Portal</span>
-    </a>
-
+    @canany(['coding','secretariat'])
+      <a href="{{route('home')}}" class="btn-link disabled brand-link ">
+        <span class="brand-text font-weight-light">Doctorat Portal</span>
+      </a>
+    @elsecanany(['admin'])
+      <a href="{{route('home')}}" class="brand-link">
+        <span class="brand-text font-weight-light">Doctorat Portal</span>
+      </a>
+    @endcanany
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -77,40 +83,41 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="{{route('students.index')}}" class="nav-link {{ (request()->is('students*')) ? 'active' : '' }}">
-              <i class="nav-icon fas fa-graduation-cap"></i>
-              <p>Students</p>
-            </a>
-          </li>
+            @canany(['admin','coding'])         
+            <li class="nav-item">
+              <a href="{{route('students.index')}}" class="nav-link {{ (request()->is('students*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-user"></i>
+                <p>Student</p>
+              </a>
+            </li>
+            @endcanany
+            @canany(['admin','secretariat'])
+            <li class="nav-item ">
+              <a href="{{route('notes.index')}}" class="nav-link {{ (request()->is('notes*')) ? 'active' : '' }}">
+                <i class="nav-icon fas fa-users"></i>
+                <p>Notes</p>
+              </a>
+            </li>
+               
           <li class="nav-item">
             <a href="{{route('teachers.index')}}" class="nav-link {{ (request()->is('teachers*')) ? 'active' : '' }}">
               <i class="nav-icon far fa-edit"></i>
               <p>Teachers</p>
             </a>
           </li>
-          <li class="nav-item has-treeview {{ (request()->is('users*')) ? 'menu-open' : '' }} {{ (request()->is('roles*')) ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
-              <p>
-                Users
-                <i class="right fas fa-angle-left"></i>
-              </p>
+          @endcanany 
+          @can('admin')
+          <li class="nav-item">
+            <a href="{{route('users.index')}}" class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Users</p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{route('users.index')}}" class="nav-link {{ (request()->is('users*')) ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-user"></i>
-                  <p>List</p>
-                </a>
-              </li>
-              <li class="nav-item ">
-                <a href="{{route('roles.index')}}" class="nav-link {{ (request()->is('roles*')) ? 'active' : '' }}">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>Roles</p>
-                </a>
-              </li>
-            </ul>
+          </li>
+          <li class="nav-item ">
+            <a href="{{route('roles.index')}}" class="nav-link {{ (request()->is('roles*')) ? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Roles</p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="{{route('specialities.index')}}" class="nav-link {{ (request()->is('specialities*')) ? 'active' : '' }}">
@@ -118,7 +125,7 @@
               <p>Specialities</p>
             </a>
           </li>
-          
+          @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -135,12 +142,11 @@
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">Starter Page</h1>
           </div><!-- /.col -->
-          <div class="col-sm-6">
+          {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
+              <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             </ol>
-          </div><!-- /.col -->
+          </div> --}}<!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
@@ -175,8 +181,12 @@
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="{{ asset('js/jquery.tabledit.min.js') }}"></script>
 <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/Chart.min.js') }}"></script>
 @include('inc.script')
+@include('inc.Chart')
 </body>
 </html>
