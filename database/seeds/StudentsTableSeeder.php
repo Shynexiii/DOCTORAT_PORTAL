@@ -20,6 +20,12 @@ class StudentsTableSeeder extends Seeder
 
         Excel::import(new StudentsImport, 'Student list.xlsx', 'local');
 
+        $students = Student::all();
+        
+        foreach ($students as $student) {
+            $student->secrete_code = strtoupper(substr($student->speciality->name,0 ,2)).'00'.$student->id;
+            $student->save();
+        }
 
         
     }

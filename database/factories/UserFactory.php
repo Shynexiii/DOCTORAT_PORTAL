@@ -22,7 +22,7 @@ $factory->define(User::class, function (Faker $faker) {
         'first_name'    =>  $faker->firstName,
         'last_name'     =>  $faker->lastName,
         'username'      =>  $faker->userName,
-        'email'         =>  $faker->fafeEmail,
+        'email'         =>  $faker->safeEmail,
         'password'      =>  Hash::make('123456'),
         'phone_number'  =>  $faker->e164PhoneNumber,
         'Date_Of_Birth' =>  $faker->date($format = 'Y/m/d', $max = 'now'),

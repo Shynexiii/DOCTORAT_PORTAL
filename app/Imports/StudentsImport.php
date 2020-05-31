@@ -37,7 +37,7 @@ class StudentsImport implements ToModel, WithValidation, WithHeadingRow
     public function model(array $row)
     {
         $student = new Student([
-            'speciality_id'                     => request()->speciality ?? "1",
+            'speciality_id'                     => request()->speciality ?? '1',
             'register_number'					=> $row['matricule_candidat'],
             'bac_number'						=> $row['matricule_bac'],
             'bac_year'							=> $row['annee_de_bac'],
