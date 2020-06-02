@@ -143,7 +143,9 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('users.index');
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
 
     // public function export() 

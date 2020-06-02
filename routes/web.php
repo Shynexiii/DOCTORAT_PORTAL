@@ -49,15 +49,16 @@ Route::group(['middleware' => ['can:admin']], function () {
     //Students CRUD
   
     Route::get('students/create', 'Backend\Student\StudentController@create')->name('students.create');
-    Route::post('students/store', 'Backend\Student\StudentController@store')->name('students.store');
+    Route::get('students/download', 'Backend\Student\StudentController@downloadForm')->name('students.downloadForm');
+    Route::get('specialities/{speciality}/students/list', 'Backend\Student\StudentController@list')->name('students.list');
     Route::get('students/{student}', 'Backend\Student\StudentController@show')->name('students.show');
     Route::get('students/{student}/edit', 'Backend\Student\StudentController@edit')->name('students.edit');
+    Route::post('students/download', 'Backend\Student\StudentController@download')->name('students.download');
+    Route::post('students/generateNotes', 'Backend\Student\StudentController@generateNotes')->name('students.generateNotes');
+    Route::post('students/store', 'Backend\Student\StudentController@store')->name('students.store');
+    Route::post('students', 'Backend\Student\StudentController@secrete_code')->name('students.secrete_code');
     Route::patch('students/{student}', 'Backend\Student\StudentController@update')->name('students.update');
     Route::delete('students/{student}', 'Backend\Student\StudentController@destroy')->name('students.delete');
-    Route::post('students', 'Backend\Student\StudentController@secrete_code')->name('students.secrete_code');
-    Route::get('specialities/{speciality}/students/list', 'Backend\Student\StudentController@list')->name('students.list');
-    Route::get('specialities/{speciality}/students/{student}/module1', 'Backend\Student\StudentController@editModule1')->name('students.editModule1');
-    Route::patch('specialities/{speciality}/students/{student}','Backend\Student\StudentController@addNote')->name('students.addNote');
     
     
     //Specialities CRUD

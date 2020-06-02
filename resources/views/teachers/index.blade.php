@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title','Teachers')
 
 @section('content')
 <div class="card">
@@ -26,11 +27,8 @@
                             <td>{{ $teacher->speciality->name }}</td>
                             <td><span class="badge badge-pill {{$teacher->status == 1 ? 'badge-success' : 'badge-danger'  }}">{{ $teacher->status == 1 ? 'Available' : 'Unavailable'}}</span></td>
                             <td><a href="{{ route('teachers.edit',$teacher->id) }}" class="btn btn-success"><i class="fas fa-edit"></i>  Edit</a>
-                            <form action="{{route('teachers.delete',$teacher)}}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
+                            <button type="button" id="{{ $teacher->id }}" class="btn btn-danger teacherDeleteBtn"><i class="fas fa-trash-alt"></i> Delete</button>
+                            
                             </td>
                         </tr>
                     @endforeach
@@ -45,4 +43,5 @@
             </nav> --}}
         </div>
     </div>    
+@include('teachers.modal')
 @endsection

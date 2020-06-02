@@ -9,7 +9,7 @@
           @method('PATCH')
           <div class="form-group">
             <label >Speciality name</label>
-            <input type="text" class="form-control" name="speciality" value="{{ $speciality->name ?? old('name') }}"placeholder="Speciality name">
+            <input type="text" class="form-control @error('name') is-invalid @enderror" name="speciality" value="{{ $speciality->name ?? old('name') }}" placeholder="Speciality name">
           </div>    
           <button type="submit" class="btn btn-primary w-3">Update speciality</button>
         </form>

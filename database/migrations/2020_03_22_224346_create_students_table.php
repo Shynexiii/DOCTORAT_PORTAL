@@ -50,6 +50,7 @@ class CreateStudentsTable extends Migration
             $table->boolean('module_1_status')->default(0);
             $table->boolean('module_2_status')->default(0);
             $table->double('moyenne_doctorat',4,2)->nullable()->default(0);
+            $table->integer('classement')->nullable()->default(0);
             $table->timestamps();
         });
     }

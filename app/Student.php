@@ -38,6 +38,8 @@ class Student extends Model
         'module_2_note_1',
         'module_2_note_2',
         'module_2_note_3',
+        'note_final_module_1',
+        'note_final_module_2',
         'module_1_status',
         'module_2_status',
         'moyenne_doctorat',   

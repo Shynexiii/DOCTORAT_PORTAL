@@ -8,7 +8,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <p align="center" ><strong> Are you sure you want to remove this data ?</strong></p>
+        <span id="form_result"></span>
+        <p align="center"><strong>Are you sure you want to delete role #<span class="roleRef"></span>?</strong></p>
         <form>
           </div>
           <div class="modal-footer">

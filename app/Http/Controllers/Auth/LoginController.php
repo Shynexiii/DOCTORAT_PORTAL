@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -23,11 +24,13 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
+    
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -44,12 +47,16 @@ class LoginController extends Controller
         return 'username';
     }
 
+
     protected function redirectTo(){
         if(Auth::user()->roles->pluck('name')->contains('admin')){
+            Session::flash('success', 'You are successfully logged in');
             return '/home';
         }elseif(Auth::user()->roles->pluck('name')->contains('coding')){
+            Session::flash('success', 'You are successfully logged in');
             return '/students';
         }elseif(Auth::user()->roles->pluck('name')->contains('secretariat')){
+            Session::flash('success', 'You are successfully logged in');
             return '/notes';
         }
     }

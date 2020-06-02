@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title','Specialities')
 
 @section('content')
 <div class="row">
@@ -24,11 +25,7 @@
                                 <td>{{ $speciality->loadCount('students')->students_count }}</td>
                                 <td><a href="{{ route('specialities.edit',$speciality->id) }}" class="btn btn-success"><i class="fas fa-edit"></i> Edit</a>
                                 <a href="{{ route('students.list',$speciality->id) }}" class="btn btn-primary"><i class="fas fa-eye"></i> Students</a>
-                                <form action="{{route('specialities.delete',$speciality->id)}}" method="POST" class="d-inline">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-                                </form>
+                                <button type="button" id="{{ $speciality->id }}" class="btn btn-danger specialityDeleteBtn"><i class="fas fa-trash-alt"></i> Delete</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -38,4 +35,5 @@
         </div>    
     </div>
 </div>
+@include('specialities.modal')
 @endsection

@@ -12,7 +12,7 @@
               <input type="text" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') ?? "" }}" name="first_name" placeholder="First name">
               @error('first_name')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -21,7 +21,7 @@
               <input type="text" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name') ?? "" }}" name="last_name" placeholder="Last name">
               @error('last_name')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -32,7 +32,7 @@
               <input type="text" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') ?? "" }}" name="email" placeholder="Email">
               @error('email')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -41,7 +41,7 @@
               <input type="text" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
               @error('password')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -52,7 +52,7 @@
               <input type="text" class="form-control @error('Date_Of_Birth') is-invalid @enderror" value="{{ old('Date_Of_Birth') ?? "" }}" name="Date_Of_Birth" placeholder="eg: 01/01/2020">
               @error('Date_Of_Birth')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -61,7 +61,7 @@
               <input type="text" class="form-control @error('phone_number') is-invalid @enderror" value="{{ old('phone_number') ?? "" }}" name="phone_number" placeholder="Phone number">
               @error('phone_number')
                 <div class="invalid-feedback">
-                    {{ $message }}
+                    
                 </div>
               @enderror
             </div>
@@ -77,7 +77,7 @@
                 </select>
               @error('role')
                   <div class="invalid-feedback">
-                    {{ $message }}
+                    
                   </div>
               @enderror
             </div>

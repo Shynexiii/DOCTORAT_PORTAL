@@ -174,13 +174,4 @@ class NoteController extends Controller
         //
     }
 
-
-    public function operation()
-    {
-        $students = Student::all()->first();
-
-        return view('noteModal',compact('students'));
-        
-        
-    }
 }

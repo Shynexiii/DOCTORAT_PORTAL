@@ -18,7 +18,7 @@ class SpecialityController extends Controller
     {
         $specialities = Speciality::paginate(15);
         // $students = Speciality::all()->first();
-
+        
         // dd($students->loadCount('students')->students_count);
         return view('specialities.index',compact('specialities'));
     }
@@ -122,6 +122,8 @@ class SpecialityController extends Controller
     {
         $speciality->delete();
 
-        return redirect()->route('specialities.index');
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
     }
 }

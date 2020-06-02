@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title','Students')
 
 @section('content')
 <div class="row">
@@ -12,40 +13,43 @@
                     @csrf
                     <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Generate a secret code</button>
                 </form>
+                @can('admin')
+                <form action="{{ route('students.generateNotes') }}" method="POST" class="d-inline ">
+                    @csrf
+                    <button type="submit" class="btn btn-warning"><i class="fas fa-plus"></i> Generate notes</button>
+                </form>
+                @endcan
+                @can('admin')
+                <a href="{{ route('students.downloadForm') }}" class="btn btn-info"><i class="fas fa-download"></i> Download</a>
+                @endcan
 
             </div>
-            
             <div class="card-body">
                 <table id="studentsTable" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
-                            <th style="">Registration number</th>
-                            <th style="">Name Fr</th>
-                            <th style="">Name Fr</th>
-                            <th style="">Speciality</th>
-                            <th style="">Secrete code</th>
-                            <th style="">Action</th>
-                        
+                            <th>Registration number</th>
+                            <th>Secrete code</th>
+                            <th>First name</th>
+                            <th>Last name</th>
+                            <th>Module 1</th>
+                            <th>Module 2</th>
+                            <th>Average</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         @foreach ($students as $student)
                             <tr>
                                 <td>{{ $student->register_number }}</td>
-                                <td>{{ $student->first_name_fr }} {{ $student->last_name_fr }}</td>
-                                <td>{{ $student->first_name_ar }} {{ $student->last_name_ar }}</td>
-                                <td>{{ $student->speciality->name }}</td>
                                 <td>{{ $student->secrete_code }}</td>
-                                <td><a href="{{ route('students.edit',$student->id) }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                <form action="{{route('students.delete',$student->id)}}" method="POST" class="d-inline">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                                </td>
+                                <td>{{ $student->first_name_fr }}</td>
+                                <td>{{ $student->last_name_fr }}</td>
+                                <td>{{ $student->note_final_module_1 }}</td>
+                                <td>{{ $student->note_final_module_2 }}</td>
+                                <td>{{ $student->moyenne_doctorat }}</td>
                             </tr>
                         @endforeach
-                    </tbody> --}}
+                    </tbody>
                 </table>            
                 
             </div>

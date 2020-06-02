@@ -1,44 +1,8 @@
 <script>
     $(document).ready(function(){
         $('#studentsTable').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax:{
-                url: "{{ route('students.index') }}",
-                
-            },columnDefs: [
-                @cannot('admin')
-                { visible: false, targets : [5] },
-                @endcannot
-            ],
-            columns: [
-                {
-                    data: 'register_number',
-                    name: 'register_number',
-                },
-                {
-                    data: 'last_name_fr',
-                    name: 'last_name_fr',
-                },
-                {
-                    data: 'first_name_fr',
-                    name: 'first_name_fr',
-                },
-                {
-                    data: 'speciality_requested_fr',
-                    name: 'speciality_requested_fr',
-                },
-                {
-                    data: 'secrete_code',
-                    name: 'secrete_code',
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                },
-            ],
+            
+            
         });
         
     });
@@ -46,6 +10,7 @@
 
     $(document).ready(function(){
         $('#rolesTable').DataTable({
+            "responsive": true,
             processing: true,
             serverSide: true,
             ajax:{
@@ -103,7 +68,7 @@
                     if(data.errors){
                         html = '<div class="alert alert-danger">';
                         for (var count = 0; count < data.errors.length; count++) {
-                            html += '<span>' + data.errors[count] + '</span>';   
+                            html += '<span>' + data.errors[count] + '</span></br>';   
                         }
                         html += '</div>';
                     }
@@ -119,7 +84,6 @@
 
         $(document).on('click', '.edit', function () {
             id = $(this).attr('id');
-            note
             $.ajax({
                 url: "roles/" + id + "/edit",
                 dataType: "json",
@@ -148,9 +112,10 @@
                     "_token": "{{ csrf_token() }}",
                 },
                 beforeSend:function(){
-                    $('deleteBtn').text('Deleting...');
+                    $('#deleteBtn').text('Deleting...');
                 },
                 success:function(data){
+                    
                     setTimeout(() => {
                         $('#confirmationModal').modal('hide');
                         $('#rolesTable').DataTable().ajax.reload();
@@ -159,8 +124,12 @@
                 }
             });
         });
+
+        
         
     });
+    
+    
 /* -----------------------Note ----------------------*/
  
 
@@ -184,12 +153,11 @@ $(document).ready(function(){
                 $(cells[3]).css("background-color", "");
             } */
 
-            if (data.module_2_status == 1 && data.module_2_note_3 == 0) {
+            if (data.module_2_status == 1) {
                 $(cells[7]).css("background-color", "#ff0000");
             }else{
                 $(cells[7]).css("background-color", "");
-            }
-             
+            } 
         },
         columnDefs : [
             { className: "note_1", targets:  [3] },
@@ -310,15 +278,15 @@ $(document).ready(function(){
                     if(data.errors){
                         html = '<div class="alert alert-danger">';
                         for (var count = 0; count < data.errors.length; count++) {
-                            html += '<span>' + data.errors[count] + '</span>';   
+                            html += '<span>' + data.errors[count] + '</span></br>';   
                         }
                         html += '</div>';
                     }
                     if(data.success){
                         html =' <div class="alert alert-success">' + data.success + '</div>';
                         $('#noteForm')[0].reset();
-                        $('#notesTable').DataTable().ajax.reload();
-                        $('#formNoteModal').modal('hide');
+                        $('#notesTable').DataTable().ajax.reload(null, false);
+                        //$('#formNoteModal').modal('hide');
                     }
                     $('#form_result').html(html);
                     
@@ -353,8 +321,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('#studentsListTable').DataTable({
-        responsive: true,
-        "order": [[ 7, 'asc' ]],
+        "responsive": true,
     });
     
 });
@@ -367,9 +334,131 @@ $(document).ready(function(){
             { "orderable": false, "targets": 2 },
         ],
     });
-    
 });
 
+$(document).ready(function(){
+    $('.userDeleteBtn').click( function () {
+        var userid = $(this).attr('id');
+        $('.userDeleteBtn').val(userid);
+        $('#userDeleteModal').modal('show');
+    });
+});
+
+$(".userDelete").click(function(){
+    var user = $('.userDeleteBtn').val();
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+    {
+        url: "users/"+user,
+        type: 'delete', 
+        dataType: "JSON",
+        data: {
+            "id": user 
+        },
+        beforeSend:function(){
+            $('.userDelete').text('Deleting...');
+        },
+        success: function (response)
+        {
+            setTimeout(() => {
+                $('#userDeleteModal').modal('hide');
+                location.reload();
+            }, 500);
+        },
+        error: function(xhr) {
+         console.log(xhr.responseText); 
+       }
+    });
+});
+
+$(document).ready(function(){
+    $('.teacherDeleteBtn').click( function () {
+        var teacherid = $(this).attr('id');
+        $('.teacherDeleteBtn').val(teacherid);
+        $('#teacherDeleteModal').modal('show');
+    });
+});
+
+$(".teacherDelete").click(function(){
+    var teacher = $('.teacherDeleteBtn').val();
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+    {
+        url: "teachers/"+teacher,
+        type: 'delete', 
+        dataType: "JSON",
+        data: {
+            "id": teacher 
+        },
+        beforeSend:function(){
+            $('.teacherDelete').text('Deleting...');
+        },
+        success: function (response)
+        {
+            setTimeout(() => {
+                $('#teacherDeleteModal').modal('hide');
+                location.reload();
+            }, 500);
+        },
+        error: function(xhr) {
+         console.log(xhr.responseText); 
+       }
+    });
+});
+
+$(document).ready(function(){
+    $('.specialityDeleteBtn').click( function () {
+        var specialityid = $(this).attr('id');
+        $('.specialityDeleteBtn').val(specialityid);
+        $('#specialityDeleteModal').modal('show');
+    });
+});
+
+$(".specialityDelete").click(function(){
+    var specialityid = $('.specialityDeleteBtn').val();
+    
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax(
+    {
+        url: "specialities/"+specialityid,
+        type: 'delete', 
+        dataType: "JSON",
+        data: {
+            "id": specialityid
+        },
+        beforeSend:function(){
+            $('.specialityDelete').text('Deleting...');
+        },
+        success: function (response)
+        {
+            setTimeout(() => {
+                $('#specialityDeleteModal').modal('hide');
+                location.reload();
+            }, 500);
+        },
+        error: function(xhr) {
+         console.log(xhr.responseText); 
+       }
+    });
+});
+
+@if(Session::has('success'))
+toastr.success("{{ Session::get('success') }}");
+@endif
 
 
 </script>

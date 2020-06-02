@@ -2,12 +2,10 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/custom.css": "/css/custom.css",
+    "/css/datatables.min.css": "/css/datatables.min.css",
     "/js/custom.js": "/js/custom.js",
     "/js/Chart.min.js": "/js/Chart.min.js",
-    "/js/jquery.tabledit.min.js": "/js/jquery.tabledit.min.js",
-    "/css/dataTables.bootstrap4.min.css": "/css/dataTables.bootstrap4.min.css",
-    "/css/responsive.bootstrap4.min.css": "/css/responsive.bootstrap4.min.css",
-    "/js/dataTables.bootstrap4.min.js": "/js/dataTables.bootstrap4.min.js",
-    "/js/jquery.dataTables.min.js": "/js/jquery.dataTables.min.js",
-    "/js/responsive.bootstrap4.min.js": "/js/responsive.bootstrap4.min.js"
+    "/js/datatables.min.js": "/js/datatables.min.js",
+    "/css/toastr.min.css": "/css/toastr.min.css",
+    "/js/toastr.min.js": "/js/toastr.min.js"
 }

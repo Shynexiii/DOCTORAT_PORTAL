@@ -1,10 +1,12 @@
 @extends('layouts.master')
+@section('title','Notes')
 
 @section('content')
 <div class="row">
     <div class="col">
         <div class="card">
             <div class="card-body">
+                
                 <table id="notesTable" class="table table-bordered table-striped table-sm" align="center">
                     <thead>
                         <tr>

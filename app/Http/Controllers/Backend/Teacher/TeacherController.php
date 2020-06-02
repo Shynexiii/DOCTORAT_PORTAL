@@ -114,7 +114,9 @@ class TeacherController extends Controller
     {
         $teacher->delete();
 
-        return redirect()->route('teachers.index');
+        return response()->json([
+            'success' => 'Record deleted successfully!'
+        ]);
 
     }
 }

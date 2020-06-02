@@ -4,11 +4,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Doctorat | Home</title>
+  <title>Doctorat | @yield('title', 'Project')</title>
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/datatables.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -140,7 +140,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark">@yield('title','')</h1>
           </div><!-- /.col -->
           {{-- <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -159,6 +159,7 @@
           <div class="col-md">
             @include('inc.message')
             @yield('content')
+            
           </div>
         </div>
         <!-- /.row -->
@@ -179,14 +180,14 @@
   </footer>
 </div>
 
+
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-<script src="{{ asset('js/jquery.tabledit.min.js') }}"></script>
-<script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('js/datatables.min.js') }}"></script>
 <script src="{{ asset('js/Chart.min.js') }}"></script>
+<script src="{{ asset('js/toastr.min.js') }}"></script>
 @include('inc.script')
 @include('inc.Chart')
+
 </body>
 </html>

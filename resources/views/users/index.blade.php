@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('title','Users')
 
 @section('content')
 <div class="card">
@@ -26,11 +27,12 @@
                             <td>{{ $user->phone_number }}</td>
                             <td>{{ implode($user->roles()->get()->pluck('name')->toArray())}}</td>
                             <td><a href="{{ route('users.edit',$user->id) }}" class="btn btn-success"><i class="fas fa-edit"></i>  Edit</a>
-                            <form action="{{route('users.delete',$user)}}" method="POST" class="d-inline">
+                            {{-- <form action="{{route('users.delete',$user)}}" method="POST" class="d-inline">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
-                            </form>
+                            </form> --}}
+                            <button type="button" id="{{ $user->id }}" class="btn btn-danger userDeleteBtn"><i class="fas fa-trash-alt"></i> Delete</button>
                             </td>
                         </tr>
                     @endforeach
@@ -38,5 +40,6 @@
             </table>            
             
         </div>
-    </div>    
+    </div> 
+@include('users.modal')
 @endsection

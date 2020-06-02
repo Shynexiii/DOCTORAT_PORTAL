@@ -6,6 +6,7 @@ use App\Student;
 use App\Speciality;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
@@ -20,31 +21,10 @@ class StudentController extends Controller
      */
     public function index()
     {       
-        if(request()->ajax()){
-            $data = Student::latest()->get();
-            return DataTables::of($data)
-            ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary">Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger">Delete</button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
-
-        }
-        return view('students.index');
+        $students = Student::all();
+        return view('students.index',compact('students'));
     }
-    protected function getColumns()
-    {
-        return [
-            'register_number',
-            'first_name_fr',
-            'last_name_fr',
-            'speciality',
-            'secrete_code',
-            'action',
-        ];
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -55,6 +35,22 @@ class StudentController extends Controller
     {
         $specialities = Speciality::all();
         return view('students.create',compact('specialities'));
+    }
+
+    public function downloadForm()
+    {
+        $specialities = Speciality::all();
+        return view('students.downloadForm',compact('specialities'));
+    }
+
+    public function download(Request $request)
+    {
+        //dd($request);
+        request()->validate([
+            'name'    => ['required'],
+        ]);
+        return (new StudentsExport($request->speciality))->download('Students.xlsx');
+        //return redirect()->route('students.downloadForm');
     }
 
     /**
@@ -118,7 +114,8 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student = Student::find($id);
+        $student->delete();
     }
 
     public function secrete_code(Request $request)
@@ -140,74 +137,82 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function list(Speciality $speciality){
-        $specialities = $speciality->students()->paginate(15);
+        $specialities = $speciality->students()->get();
         //dd($specialities);
         return view('students.list',compact('specialities'));
     }
 
-    public function editModule1(Speciality $speciality, Student $student){
-        return view('students.editModule1',compact('speciality','student'));
+
+    public function generateNotes(){
+        $students = Student::all();
+        
+        foreach ($students as $student) {
+            $student->secrete_code = strtoupper(substr($student->speciality->name,0 ,2)).'00'.$student->id;
+            
+            $student->module_1_note_1 = random_int (1,15);
+            $student->module_1_note_2 = random_int (1,15);
+            if( abs($student->module_1_note_1 - $student->module_1_note_2) >= 3){
+                $student->module_1_note_3 = random_int (1,15);
+            }
+            
+            $student->module_2_note_1 = random_int (1,15);
+            $student->module_2_note_2 = random_int (1,15);
+            if( abs($student->module_2_note_1 - $student->module_2_note_2) >= 3){
+                $student->module_2_note_3 = random_int (1,15);
+            }
+
+            $note_1_1 = $student->module_1_note_1;
+            $note_1_2 = $student->module_1_note_2;
+            $note_1_3 = $student->module_1_note_3;
+            $note_2_1 = $student->module_2_note_1;
+            $note_2_2 = $student->module_2_note_2;
+            $note_2_3 = $student->module_2_note_3;
+
+            if( abs($note_1_1 - $note_1_2) >= 3){
+                $note_finale_1_1 = ($note_1_3 == null) ? max($note_1_1,$note_1_2) :max($note_1_1,$note_1_2,$note_1_3);
+                $status_1 = 1;   
+            }else{
+                $note_finale_1_1 = max($note_1_1,$note_1_2); 
+                $status_1 = 0;
+                $note_1_3 = 0;
+            }
+
+            if( abs($note_2_1 - $note_2_2) >= 3){
+                $note_finale_2_1 = ($note_2_3 == null) ? max($note_2_1,$note_2_2) :max($note_2_1,$note_2_2,$note_2_3);
+                $status_2 = 1;
+            }else{
+                $note_finale_2_1 = max($note_2_1,$note_2_2);
+                $status_2 = 0;
+                $note_2_3 = 0;
+            }
+
+            $module_1_status = $status_1;
+            $module_2_status = $status_2;
+            $note_final_module_1 = $note_finale_1_1;
+            $note_final_module_2 = $note_finale_2_1;
+            $moyenne_doctorat = ($note_final_module_1 + $note_final_module_2)/2;
+            
+            $data = array(
+                'module_1_note_1' => $note_1_1,
+                'module_1_note_2' => $note_1_2,
+                'module_1_note_3' => $note_1_3,
+                'module_2_note_1' => $note_2_1,
+                'module_2_note_2' => $note_2_2,
+                'module_2_note_3' => $note_2_3,
+                'note_final_module_1' => $note_final_module_1,
+                'note_final_module_2' => $note_final_module_2,
+                'module_1_status' => $module_1_status,
+                'module_2_status' => $module_2_status,
+                'moyenne_doctorat' => $moyenne_doctorat,
+            );
+            $student->update($data);
+        }
+
+        return redirect()->route('students.index');
     }
 
-    public function addNote(Speciality $speciality, Student $student)
-    {
 
-        $notes = request()->validate([
-            'module_1_note1' => ['min:0','max:20'],
-            'module_1_note2' => ['min:0','max:20'],
-            'module_1_note3' => ['min:0','max:20'],
-            'module_2_note1' => ['min:0','max:20'],
-            'module_2_note2' => ['min:0','max:20'],
-            'module_2_note3' => ['min:0','max:20'],
-        ]);
-        
-        if(isset($notes['module_1_note1'])){
-            $student->note_final_module_1 = $notes['module_1_note1'];
-
-        }
-        
-        
-        if(isset($notes['module_1_note1']) and isset($notes['module_1_note2'])){
-            $student->module_1_note_1 = $notes['module_1_note1'];
-            $student->module_1_note_2 = $notes['module_1_note2'];
-
-            if(abs($notes['module_1_note1'] - $notes['module_1_note2']) <= 3){
-                $note_module_1 = $notes['module_1_note2'];
-                $student->note_final_module_1 = $notes['module_1_note2'];
-
-            }else{
-                $note_module_1 = $notes['module_1_note3'];
-                $student->module_1_note_3 = $notes['module_1_note3'];
-                $student->note_final_module_1 = $notes['module_1_note3'];
-
-            }
-        }
-        if(isset($notes['module_2_note1'])){
-            $student->note_final_module_2 = $notes['module_2_note1'];
-
-        }
-
-        if(isset($notes['module_2_note1']) and isset($notes['module_2_note2'])){
-            $student->module_2_note_1 = $notes['module_2_note1'];
-            $student->module_2_note_2 = $notes['module_2_note2'];
-
-            if(abs($notes['module_2_note1'] - $notes['module_2_note2']) <= 3){
-                $note_module_2 = $notes['module_2_note2'];
-                $student->note_final_module_2 = $notes['module_2_note2'];
-
-            }else{
-                $note_module_2 = $notes['module_2_note3'];
-                $student->module_2_note_3 = $notes['module_2_note3'];
-                $student->note_final_module_2 = $notes['module_2_note3'];
-
-
-            }
-        }
-        $moyenne = ($note_final_module_1 + $note_final_2)/2;
-        $student->moyenne_doctorat = $moyenne;
-        $student->save();
-        return redirect()->route('students.list',['speciality' => $speciality->id]);
-    }
+    
 
 
     
