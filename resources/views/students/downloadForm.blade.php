@@ -19,8 +19,8 @@
               {{-- @error('name')
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>
-                </span> --}}
-              @enderror            
+                </span>
+              @enderror --}}         
           </div>    
           <button type="submit" class="btn btn-primary w-3"><i class="fas fa-file-download"></i> Download</button>
         </form>

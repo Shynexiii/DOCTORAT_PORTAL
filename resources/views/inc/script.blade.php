@@ -1,10 +1,8 @@
 <script>
     $(document).ready(function(){
         $('#studentsTable').DataTable({
-            
-            
+            "responsive": true,
         });
-        
     });
     
 
@@ -137,7 +135,7 @@ $(document).ready(function(){
     $('#notesTable').DataTable({
         processing: true,
         serverSide: true,
-        responsive: true,
+        "responsive": true,
         ajax:{
             url: "{{ route('notes.index') }}",
             dataType: "json",
@@ -284,7 +282,7 @@ $(document).ready(function(){
                     }
                     if(data.success){
                         html =' <div class="alert alert-success">' + data.success + '</div>';
-                        $('#noteForm')[0].reset();
+                        //$('#noteForm')[0].reset();
                         $('#notesTable').DataTable().ajax.reload(null, false);
                         //$('#formNoteModal').modal('hide');
                     }
