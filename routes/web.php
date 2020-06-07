@@ -23,6 +23,8 @@ Route::group(['middleware' => ['guest']], function () {
 
 Route::group(['middleware' => ['can:admin']], function () {
     
+
+    
     Route::get('home', 'Backend\HomeController@index')->name('home');
     Route::get('users/export', 'Backend\User\UserController@export')->name('users.export');
     Route::post('demo/import', 'DemoController@import')->name('demo.import');
@@ -70,6 +72,8 @@ Route::group(['middleware' => ['can:admin']], function () {
     Route::patch('specialities/{speciality}', 'Backend\University\SpecialityController@update')->name('specialities.update');
     Route::delete('specialities/{speciality}', 'Backend\University\SpecialityController@destroy')->name('specialities.delete');
 
+    //Backup
+    Route::post('backup','Backend\Backup\BackupController@backup')->name('backup');
     
     
 });
