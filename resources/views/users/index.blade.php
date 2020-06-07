@@ -32,7 +32,11 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
                             </form> --}}
+                            @if(Auth::user() == $user)
+                            <button type="button" disabled id="{{ $user->id }}" class="btn btn-danger userDeleteBtn"><i class="fas fa-trash-alt"></i> Delete</button>
+                            @else
                             <button type="button" id="{{ $user->id }}" class="btn btn-danger userDeleteBtn"><i class="fas fa-trash-alt"></i> Delete</button>
+                            @endif
                             </td>
                         </tr>
                     @endforeach
