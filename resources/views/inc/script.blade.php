@@ -2,7 +2,16 @@
     $(document).ready(function(){
         $('#studentsTable').DataTable({
             "responsive": true,
+            columnDefs : [
+                {
+                    "targets": [ 7 ],
+                    "visible": false,
+                }          
+                
+            ],
         });
+
+        
     });
     
 
@@ -312,6 +321,7 @@ $(document).ready(function(){
         "columnDefs": [
             { "searchable": false, "targets": 5 },
             { "orderable": false, "targets": 5 },
+            
         ],
     });
     

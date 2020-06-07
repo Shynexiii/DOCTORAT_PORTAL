@@ -47,6 +47,7 @@
                                 <td>{{ $student->note_final_module_1 }}</td>
                                 <td>{{ $student->note_final_module_2 }}</td>
                                 <td>{{ $student->moyenne_doctorat }}</td>
+                                <td style="display:none;">{{ $student->speciality->name }}</td>
                             </tr>
                         @endforeach
                     </tbody>
