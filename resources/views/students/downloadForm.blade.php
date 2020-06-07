@@ -13,7 +13,7 @@
             <select class="form-control @error('name') is-invalid @enderror" name="speciality">
               <option selected disabled>Choose...</option>
               @foreach ($specialities as $speciality)
-                <option value="{{$speciality->id ?? @old('speciality')}}">{{$speciality->name}}</option>
+                <option value="{{$speciality->id}}">{{$speciality->name}}</option>
               @endforeach
               </select>
               {{-- @error('name')

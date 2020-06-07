@@ -45,10 +45,10 @@ class StudentController extends Controller
 
     public function download(Request $request)
     {
-        //dd($request);
         request()->validate([
-            'name'    => ['required'],
+            'speciality'    => ['required'],
         ]);
+
         return (new StudentsExport($request->speciality))->download('Students.xlsx');
         //return redirect()->route('students.downloadForm');
     }
