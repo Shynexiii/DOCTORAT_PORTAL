@@ -126,7 +126,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link" data-toggle="modal" data-target="#modelId">
+            <a href="{{route('backup.index')}}" class="nav-link {{ (request()->is('backup*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-download"></i>
               <p>Backup</p>
             </a>
@@ -187,7 +187,6 @@
   </footer>
 </div>
 
-@include('backup.modal')
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/datatables.min.js') }}"></script>

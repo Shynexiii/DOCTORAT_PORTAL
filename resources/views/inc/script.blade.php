@@ -466,6 +466,8 @@ $(".specialityDelete").click(function(){
 
 @if(Session::has('success'))
 toastr.success("{{ Session::get('success') }}");
+@elseif(Session::has('danger'))
+toastr.danger("{{ Session::get('danger') }}");
 @endif
 
 

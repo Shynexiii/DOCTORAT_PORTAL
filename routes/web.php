@@ -73,7 +73,8 @@ Route::group(['middleware' => ['can:admin']], function () {
     Route::delete('specialities/{speciality}', 'Backend\University\SpecialityController@destroy')->name('specialities.delete');
 
     //Backup
-    Route::post('backup','Backend\Backup\BackupController@backup')->name('backup');
+    Route::get('backup','Backend\Backup\BackupController@index')->name('backup.index');
+    Route::post('backup','Backend\Backup\BackupController@create')->name('backup.create');
     
     
 });
