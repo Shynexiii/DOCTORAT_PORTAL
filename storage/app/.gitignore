@@ -1,5 +1,4 @@
 *
 !public/
-!Laravel/
 !.gitignore
 !Student list.xlsx
