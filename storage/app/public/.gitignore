@@ -1,3 +1,5 @@
 *
-!Laravel
+!Laravel/
+!Laravel/*.zip
+
 !.gitignore
