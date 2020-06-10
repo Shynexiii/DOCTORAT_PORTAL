@@ -344,6 +344,17 @@ $(document).ready(function(){
     });
 });
 
+
+$(document).ready(function(){
+    $('#backupsTable').DataTable({
+        responsive: true,
+        "columnDefs": [
+            { "searchable": false, "targets": 4 },
+            { "orderable": false, "targets": 4 },
+        ],
+    });
+});
+
 $(document).ready(function(){
     $('.userDeleteBtn').click( function () {
         var userid = $(this).attr('id');

@@ -21,19 +21,20 @@ class BackupController extends Controller
      */
     public function index()
     {
-        $files = Storage::allFiles('Laravel');
+        $files = Storage::allFiles('public/Laravel');
+        //dd($files);
+
         $backup = [];
         foreach ($files as $file) {
             $backup[] = [
-                'file_path' => $file,
-                'file_name' => str_replace('/', '-', $file), 
-                'file_url'  => storage_path($file),
-                'file_date' => Carbon::parse(Storage::lastModified($file))->format('d/m/Y H:i:s'),
-                'file_size' => Format::humanReadableSize(Storage::size($file)),
+                'file_path'     => $file,
+                'file_name'     => pathinfo($file)['filename'], 
+                'file_date'     => date('d/m/Y H:i:s',Storage::lastModified($file)),
+                'file_size'     => Format::humanReadableSize(Storage::size($file)),
                  
             ];
         }
-        //dd($backup[0]['file_name']);
+        //dd($backup);
         return view('backup.index',compact('backup'));   
     }
 
@@ -54,6 +55,9 @@ class BackupController extends Controller
         }
     }
 
-    
+    public function download(Request $request){
+        
+        return Storage::download($request->file_name);
+    }    
     
 }

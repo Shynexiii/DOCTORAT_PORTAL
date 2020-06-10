@@ -74,7 +74,8 @@ Route::group(['middleware' => ['can:admin']], function () {
 
     //Backup
     Route::get('backup','Backend\Backup\BackupController@index')->name('backup.index');
-    Route::post('backup','Backend\Backup\BackupController@create')->name('backup.create');
+    Route::post('backup/create','Backend\Backup\BackupController@create')->name('backup.create');
+    Route::post('backup','Backend\Backup\BackupController@download')->name('backup.download');
     
     
 });

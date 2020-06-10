@@ -29,7 +29,13 @@
                                 <td>{{ $item['file_name'] }}</td>
                                 <td>{{ $item['file_date'] }}</td>
                                 <td>{{ $item['file_size'] }}</td>
-                                <td><a href="{{ $item['file_path'] }}"><i class="fas fa-download"></i></a></td>
+                                <td>
+                                    <form action="{{ route('backup.download') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="file_name" value="{{ $item['file_path'] }}">
+                                        <button type="submit" class="btn btn-outline-primary"><i class="fas fa-download"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
