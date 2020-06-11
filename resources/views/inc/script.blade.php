@@ -352,6 +352,8 @@ $(document).ready(function(){
             { "searchable": false, "targets": 4 },
             { "orderable": false, "targets": 4 },
         ],
+        "order": [[ 2, 'desc' ]],
+
     });
 });
 
