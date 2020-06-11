@@ -353,7 +353,6 @@ $(document).ready(function(){
             { "orderable": false, "targets": 4 },
         ],
         "order": [[ 2, 'desc' ]],
-
     });
 });
 
