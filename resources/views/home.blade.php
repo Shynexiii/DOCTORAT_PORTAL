@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-info">
+            <div class="small-box bg-warning">
                 <div class="inner">
                     <h3>{{ $studentAdmitted }}</h3>
                     <p>Students Admitted</p>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-info">
+            <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{ $speciality->count() }}</h3>
                     <p>Specialities</p>
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-info">
+            <div class="small-box bg-secondary">
                 <div class="inner">
                     <h3>{{ $staff }}</h3>
                     <p>Staff</p>

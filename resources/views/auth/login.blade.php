@@ -10,7 +10,7 @@
     <title>Doctorat | Login</title>
 </head>
 <body class="hold-transition login-page">
-    <div class="login-box" style="margin-bottom: 15%;">
+    <div class="login-box" >
         <div class="login-logo">
           <b>Doctorat System</b>
         </div>
@@ -57,8 +57,21 @@
                 <!-- /.col -->
               </div>
             </form>
+            
           </div>
+          
           <!-- /.login-card-body -->
+        </div>
+        
+        <div class="alert alert-dark" role="alert">
+          <p class="mb-1">Username: admin</p>
+          <p>Password: 123456</p>
+          <hr>
+          <p class="mb-1">Username: secretariat</p>
+          <p>Password: 123456</p>
+          <hr>
+          <p class="mb-1">Username: coding</p>
+          <p>Password: 123456</p>
         </div>
       </div>
       <!-- /.login-box -->

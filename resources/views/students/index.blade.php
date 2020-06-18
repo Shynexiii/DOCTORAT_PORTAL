@@ -32,9 +32,11 @@
                             <th>Secrete code</th>
                             <th>First name</th>
                             <th>Last name</th>
-                            <th>Module 1</th>
-                            <th>Module 2</th>
-                            <th>Average</th>
+                            @can('adminOrSecretariat')
+                                <th>Module 1</th>
+                                <th>Module 2</th>
+                                <th>Average</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -44,10 +46,12 @@
                                 <td>{{ $student->secrete_code }}</td>
                                 <td>{{ $student->first_name_fr }}</td>
                                 <td>{{ $student->last_name_fr }}</td>
+                            @can('adminOrSecretariat')
                                 <td>{{ $student->note_final_module_1 }}</td>
                                 <td>{{ $student->note_final_module_2 }}</td>
                                 <td>{{ $student->moyenne_doctorat }}</td>
                                 <td style="display:none;">{{ $student->speciality->name }}</td>
+                            @endcan
                             </tr>
                         @endforeach
                     </tbody>
