@@ -81,6 +81,20 @@
                   </div>
               @enderror
             </div>
+            <div class="form-group col-md-6">
+              <label >Speciality</label>
+              <select class="form-control @error('speciality') is-invalid @enderror" name="speciality">
+                <option selected disabled>Choose...</option>
+                @foreach ($specialities as $speciality)
+                  <option value="{{$speciality->id}}">{{$speciality->name}}</option>
+                @endforeach
+                </select>
+              @error('speciality')
+                  <div class="invalid-feedback">
+                    
+                  </div>
+              @enderror
+            </div>
           </div>
           <button type="submit" class="btn btn-primary w-3">Create</button>
         </form>

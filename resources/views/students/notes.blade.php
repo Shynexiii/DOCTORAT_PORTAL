@@ -5,9 +5,9 @@
 <div class="row">
     <div class="col">
         <div class="card">
-            <div class="card-header">
+            {{-- <div class="card-header">
                 <small id="emailHelp" class="form-text font-weight-bold text-danger">* The red boxes require a third correction.</small>
-            </div>
+            </div> --}}
             <div class="card-body">
                 <table id="notesTable" class="table table-bordered table-striped">
                     <thead>

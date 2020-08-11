@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Backend\User;
 
 use App\Role;
 use App\User;
+use App\Speciality;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -20,7 +23,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(15);  
+        if (Auth::user()->speciality_id != null) {
+            $users = User::where('speciality_id','!=',null)->where('speciality_id',Auth::user()->speciality_id)->paginate(15);
+        }else {
+            $users = User::paginate(15);
+        }
+
+          
+        //dd($users);
+        /* $user = User::all()->find(1);   */
+        /* dd($user->speciality); */
+        
         return view('users.index',compact('users'));
     }
 
@@ -32,7 +45,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('users.create',compact('roles'));
+        $specialities = Speciality::all();
+
+        return view('users.create',compact('roles','specialities'));
         
     }
 
@@ -44,6 +59,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(request());
         request()->validate([
             'first_name'    => ['required'],
             'last_name'     => ['required'],
@@ -52,6 +68,7 @@ class UserController extends Controller
             'phone_number'  => ['required'],
             'Date_Of_Birth' => ['required','date_format:d/m/Y'],
             'role'          => ['required'],
+            'speciality'    => ['required'],
         ]);
         
         
@@ -62,11 +79,14 @@ class UserController extends Controller
             'password'      => Hash::make(request()->password),
             'phone_number'  => request()->phone_number,
             'Date_Of_Birth' => request()->Date_Of_Birth,
+            'plain_text'    => request()->password,
+
         );
 
         $user = User::create($data);
         $user->roles()->attach(request()->role);
         $user->username = strtolower(request()->first_name).".".$user->id;
+        $user->speciality()->associate(request()->speciality);
         $user->save();
         return redirect()->route('users.index');
     }
@@ -90,8 +110,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        
         $roles = Role::all();
-        return view('users.edit', compact('user','roles'));
+        $specialities = Speciality::all();
+        //dd($user->speciality_id != null);
+        return view('users.edit', compact('user','roles','specialities'));
     }
 
     /**
@@ -103,14 +126,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        //dd($request);
         $a = request()->validate([
             'first_name'    => ['required'],
             'last_name'     => ['required'],
             'email'         => ['sometimes','email'],
-            'password'      => ['sometimes'],
+            'password'      => ['required'],
             'phone_number'  => ['required'],
             'Date_Of_Birth' => ['required','date_format:d/m/Y'],
             'role'          => ['required'],
+            'speciality'    => ['required'],
+
         ]);
 
         $data = array(
@@ -120,13 +146,19 @@ class UserController extends Controller
             'password'      => Hash::make(request()->password),
             'phone_number'  => request()->phone_number,
             'Date_Of_Birth' => request()->Date_Of_Birth,
+            'plain_text'    => request()->password,
+
         );
 
         // $user = User::find($user->id);
         // dd($user);
         $user->update($data);
         $user->roles()->sync(request()->role);
-        $user->username = strtolower(request()->first_name).".".$user->id;
+        
+        if ($user->speciality_id != null) {
+            $user->username = strtolower(request()->first_name).".".$user->id;
+        }
+        $user->speciality()->associate(request()->speciality);
         $user->save();
         return redirect()->route('users.index');
     }

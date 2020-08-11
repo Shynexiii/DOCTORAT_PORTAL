@@ -22,7 +22,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->string('Date_Of_Birth');
+            $table->string('plain_text')->nullable();
             $table->timestamps();
+
+
         });
     }
     /**

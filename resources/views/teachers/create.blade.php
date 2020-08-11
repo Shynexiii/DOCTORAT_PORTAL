@@ -17,6 +17,7 @@
               <input type="text" class="form-control  @error('last_name') is-invalid @enderror" value="{{ old('last_name') ?? "" }}" name="last_name" placeholder="Last name">
             </div>
           </div>
+          @can('admin')
           <div class="form-row">
             <div class="form-group col-md-6">
               <label >Speciality</label>
@@ -28,6 +29,7 @@
               </select>            
             </div>
           </div>
+          @endcan
           <button type="submit" class="btn btn-primary w-3">Create</button>
         </form>
       </div>

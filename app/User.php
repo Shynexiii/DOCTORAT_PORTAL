@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name','username','email','password','phone_number','Date_Of_Birth',
+        'first_name', 'last_name','username','email','password','phone_number','Date_Of_Birth','plain_text'
     ];
 
 
@@ -46,5 +46,10 @@ class User extends Authenticatable
 
     public function hasAnyRole(array $roles){
         return $this->roles()->whereIn('name', $roles)->first();
+    }
+
+    public function speciality()
+    {
+        return $this->belongsTo('App\Speciality');
     }
 }

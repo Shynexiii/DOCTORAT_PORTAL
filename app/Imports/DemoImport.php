@@ -11,7 +11,7 @@ class DemoImport implements ToModel, WithHeadingRow
 {
     public function model(array $row)
     {
-        dd($row);
+        /* dd($row); */
         return new DatabaseDemo([
             // 'first_name'  => $row['first_name'],
             'Last name'   => $row['last_name'],

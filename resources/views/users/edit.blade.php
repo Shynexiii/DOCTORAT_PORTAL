@@ -54,6 +54,15 @@
                       </div>
                 @endforeach
             </div>
+            <div class="form-group col-md-6">
+              <label >Speciality</label>
+              <select class="form-control @error('speciality') is-invalid @enderror" name="speciality">
+                <option selected disabled>Choose...</option>
+                @foreach ($specialities as $speciality)
+                  <option value="{{$speciality->id}}" @if($user->speciality) {{ ( $user->speciality_id == $speciality->id) ? 'selected' : '' }} @endif>{{$speciality->name}}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
           <button type="submit" class="btn btn-primary w-3">Save</button>
         </form>

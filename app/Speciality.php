@@ -14,4 +14,9 @@ class Speciality extends Model
     {
         return $this->hasMany('App\Student','speciality_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

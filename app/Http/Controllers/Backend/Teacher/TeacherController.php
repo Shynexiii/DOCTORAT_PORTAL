@@ -5,7 +5,9 @@ namespace App\Http\Controllers\backend\Teacher;
 use App\Teacher;
 use App\Speciality;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class TeacherController extends Controller
 {
@@ -16,7 +18,14 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::paginate(15);
+        //dd(request()->user()->speciality);
+        if (Auth::user()->speciality_id != null) {
+            $teachers = Teacher::where('speciality_id',Auth::user()->speciality_id)->paginate(15);
+        }else {
+            $teachers = Teacher::paginate(15);
+        }
+
+        //$teachers = Teacher::paginate(15);
         return view('teachers.index',compact('teachers'));
     }
 
@@ -42,13 +51,18 @@ class TeacherController extends Controller
         request()->validate([
             'first_name'    => ['required'],
             'last_name'     => ['required'],
-            'speciality'    => ['required'],
+            'speciality'    => Rule::requiredIf(request()->user()->hasAnyRole(['admin'])),
+
         ]);
 
         $teacher = new Teacher;
         $teacher->first_name = request()->first_name;
         $teacher->last_name  = request()->last_name;
-        $teacher->speciality()->associate(request()->speciality);
+        if (request()->user()->hasAnyRole(['admin'])) {
+            $teacher->speciality()->associate(request()->speciality);
+        }else{
+            $teacher->speciality()->associate(request()->user()->speciality);
+        }
         $teacher->save();
 
         return redirect()->route('teachers.index');
@@ -89,7 +103,7 @@ class TeacherController extends Controller
         request()->validate([
             'first_name'    => ['required'],
             'last_name'     => ['required'],
-            'speciality'    => ['required'],
+            'speciality'    => Rule::requiredIf(request()->user()->hasAnyRole(['admin'])),
             'status'        => ['required'],
         ]);
 
@@ -97,7 +111,11 @@ class TeacherController extends Controller
         $teacher_update->first_name = request()->first_name;
         $teacher_update->last_name  = request()->last_name;
         $teacher_update->status     = request()->status;
-        $teacher_update->speciality()->associate(request()->speciality);
+        if (request()->user()->hasAnyRole(['admin'])) {
+            $teacher->speciality()->associate(request()->speciality);
+        }else{
+            $teacher->speciality()->associate(request()->user()->speciality);
+        }
         $teacher_update->save();
 
         return redirect()->route('teachers.index');

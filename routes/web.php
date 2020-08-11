@@ -77,11 +77,12 @@ Route::group(['middleware' => ['can:admin']], function () {
     Route::post('backup/create','Backend\Backup\BackupController@create')->name('backup.create');
     Route::post('backup','Backend\Backup\BackupController@download')->name('backup.download');
     
+    Route::get('usersPdf','Backend\Pdf\PdfController@UsersPdf')->name('users.pdf');
     
 });
 
  Route::group(['middleware' => ['can:adminOrCoding']], function () {
-
+    Route::post('students', 'Backend\Student\StudentController@secrete_code')->name('students.secrete_code');
     Route::get('students', 'Backend\Student\StudentController@index')->name('students.index');
 });
    

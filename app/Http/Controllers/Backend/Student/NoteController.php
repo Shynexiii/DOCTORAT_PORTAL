@@ -7,6 +7,7 @@ use App\Student;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class NoteController extends Controller
@@ -18,8 +19,15 @@ class NoteController extends Controller
      */
     public function index(Request $request)
     {
-        if(request()->ajax()){
+        //dd($data);
+        if (Auth::user()->speciality_id != null) {
+            $data = Student::where('speciality_id',Auth::user()->speciality_id)->latest()->get();
+        }else {
             $data = Student::latest()->get();
+        }
+
+        if(request()->ajax()){
+            //$data = Student::latest()->get();
             return DataTables::of($data)
             ->addColumn('action', function($data){
                 $button = '<button type="button" name="edit" id="'.$data->id.'" class="editNote btn btn-primary">Add note</button>';
