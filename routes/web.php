@@ -78,12 +78,14 @@ Route::group(['middleware' => ['can:admin']], function () {
     Route::post('backup','Backend\Backup\BackupController@download')->name('backup.download');
     
     Route::get('usersPdf','Backend\Pdf\PdfController@UsersPdf')->name('users.pdf');
+    Route::get('studentsPdf','Backend\Pdf\PdfController@StudentsPdf')->name('students.pdf');
     
 });
 
  Route::group(['middleware' => ['can:adminOrCoding']], function () {
     Route::post('students', 'Backend\Student\StudentController@secrete_code')->name('students.secrete_code');
     Route::get('students', 'Backend\Student\StudentController@index')->name('students.index');
+    Route::get('studentsCodePdf','Backend\Pdf\PdfController@StudentsCodePdf')->name('studentsCode.pdf');
 });
    
 Route::group(['middleware' => ['can:adminOrSecretariat']], function () {

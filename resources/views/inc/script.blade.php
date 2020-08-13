@@ -2,16 +2,7 @@
     $(document).ready(function(){
         $('#studentsTable').DataTable({
             "responsive": true,
-            columnDefs : [
-                {
-                    "targets": [ 7 ],
-                    "visible": false,
-                }          
-                
-            ],
         });
-
-        
     });
     
 

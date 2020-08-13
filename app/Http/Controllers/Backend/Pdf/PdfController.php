@@ -18,4 +18,18 @@ class PdfController extends Controller
         return $pdf->stream();
     }
 
+    public function studentsCodePdf()
+    {
+        $students = Student::all();
+        $pdf = PDF::loadView('pdf.studentsCode', compact('students'));
+        return $pdf->stream();
+    }
+
+    public function studentsPdf()
+    {
+        $students = Student::all()->sortByDesc('moyenne_doctorat');
+        $pdf = PDF::loadView('pdf.students', compact('students'));
+        return $pdf->stream();
+    }
+
 }

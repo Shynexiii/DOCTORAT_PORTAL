@@ -20,7 +20,13 @@
                 </form>
                 @endcan
                 @can('admin')
-                <a href="{{ route('students.downloadForm') }}" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
+                <a href="" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
+                @endcan
+                @can('admin')
+                <a href="{{route('students.pdf')}} {{ route('studentsCode.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
+                @endcan
+                @can('coding')
+                <a href="{{ route('studentsCode.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
                 @endcan
 
             </div>
@@ -28,8 +34,9 @@
                 <table id="studentsTable" class="table table-bordered table-striped table-sm">
                     <thead>
                         <tr>
-                            <th>Registration number</th>
+                            <th>N°</th>
                             <th>Secrete code</th>
+                            <th>Registration number</th>
                             <th>First name</th>
                             <th>Last name</th>
                             @can('adminOrSecretariat')
@@ -42,15 +49,15 @@
                     <tbody>
                         @foreach ($students as $student)
                             <tr>
-                                <td>{{ $student->register_number }}</td>
+                                <td>{{ $student->id }}</td>
                                 <td>{{ $student->secrete_code }}</td>
+                                <td>{{ $student->register_number }}</td>
                                 <td>{{ $student->first_name_fr }}</td>
                                 <td>{{ $student->last_name_fr }}</td>
                             @can('adminOrSecretariat')
                                 <td>{{ $student->note_final_module_1 }}</td>
                                 <td>{{ $student->note_final_module_2 }}</td>
                                 <td>{{ $student->moyenne_doctorat }}</td>
-                                <td style="display:none;">{{ $student->speciality->name }}</td>
                             @endcan
                             </tr>
                         @endforeach

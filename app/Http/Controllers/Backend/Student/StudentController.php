@@ -10,6 +10,7 @@ use App\Exports\StudentsExport;
 use App\Imports\StudentsImport;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
