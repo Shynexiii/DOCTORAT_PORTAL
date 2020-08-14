@@ -23,7 +23,7 @@
                 <a href="" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
                 @endcan
                 @can('admin')
-                <a href="{{route('students.pdf')}} {{ route('studentsCode.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
+                <a href="{{route('students.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
                 @endcan
                 @can('coding')
                 <a href="{{ route('studentsCode.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
