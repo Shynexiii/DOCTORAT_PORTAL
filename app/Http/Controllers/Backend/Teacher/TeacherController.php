@@ -112,9 +112,9 @@ class TeacherController extends Controller
         $teacher_update->last_name  = request()->last_name;
         $teacher_update->status     = request()->status;
         if (request()->user()->hasAnyRole(['admin'])) {
-            $teacher->speciality()->associate(request()->speciality);
+            $teacher_update->speciality()->associate(request()->speciality);
         }else{
-            $teacher->speciality()->associate(request()->user()->speciality);
+            $teacher_update->speciality()->associate(request()->user()->speciality);
         }
         $teacher_update->save();
 

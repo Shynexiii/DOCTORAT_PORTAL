@@ -18,6 +18,7 @@
             </div>
           </div>
           <div class="form-row">
+            @can('admin')
             <div class="form-group col-md-6">
               <label >Speciality</label>
               <select class="form-control @error('speciality') is-invalid @enderror" name="speciality">
@@ -27,6 +28,7 @@
                 @endforeach
               </select>            
             </div>
+            @endcan
             <div class="form-group col">
               <label >Status</label>
               <div class="form-check">
