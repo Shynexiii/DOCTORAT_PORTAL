@@ -56,7 +56,7 @@ Route::group(['middleware' => ['can:admin']], function () {
     Route::get('students/{student}', 'Backend\Student\StudentController@show')->name('students.show');
     Route::get('students/{student}/edit', 'Backend\Student\StudentController@edit')->name('students.edit');
     Route::post('students/download', 'Backend\Student\StudentController@download')->name('students.download');
-    Route::post('students/generateNotes', 'Backend\Student\StudentController@generateNotes')->name('students.generateNotes');
+    /* Route::post('students/generateNotes', 'Backend\Student\StudentController@generateNotes')->name('students.generateNotes'); */
     Route::post('students/store', 'Backend\Student\StudentController@store')->name('students.store');
     Route::post('students', 'Backend\Student\StudentController@secrete_code')->name('students.secrete_code');
     Route::patch('students/{student}', 'Backend\Student\StudentController@update')->name('students.update');

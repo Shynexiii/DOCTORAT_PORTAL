@@ -13,12 +13,12 @@
                     @csrf
                     <button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Generate a secret code</button>
                 </form>
-                @can('admin')
-                <form action="{{ route('students.generateNotes') }}" method="POST" class="d-inline ">
+                {{-- @can('admin')
+                <form action="{{ route('students.generateNotes') }}" method="POST" class="d-inline " disabled>
                     @csrf
-                    <button type="submit" class="btn btn-warning"><i class="fas fa-plus" disabled></i> Generate notes</button>
+                    <button type="submit" class="btn btn-warning"><i class="fas fa-plus" ></i> Generate notes</button>
                 </form>
-                @endcan
+                @endcan --}}
                 @can('admin')
                 <a href="" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
                 @endcan
