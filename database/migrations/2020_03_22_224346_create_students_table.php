@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('register_number');
+            $table->string('register_number')->default(0);
             $table->string('bac_number')->nullable();
             $table->string('bac_year')->nullable();
             $table->string('last_name_fr')->nullable();
@@ -38,7 +38,7 @@ class CreateStudentsTable extends Migration
             $table->string('master_thesis_note')->nullable();
             $table->string('speciality_requested_fr')->nullable();
             $table->string('speciality_requested_ar')->nullable();
-            $table->string('secrete_code')->nullable();
+            $table->string('secrete_code')->nullable()->default(0);
             $table->double('module_1_note_1',4,2)->nullable()->default(0);
             $table->double('module_1_note_2',4,2)->nullable()->default(0);
             $table->double('module_1_note_3',4,2)->nullable()->default(0);

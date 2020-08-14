@@ -16,7 +16,7 @@
                 @can('admin')
                 <form action="{{ route('students.generateNotes') }}" method="POST" class="d-inline ">
                     @csrf
-                    <button type="submit" class="btn btn-warning"><i class="fas fa-plus"></i> Generate notes</button>
+                    <button type="submit" class="btn btn-warning"><i class="fas fa-plus" disabled></i> Generate notes</button>
                 </form>
                 @endcan
                 @can('admin')
