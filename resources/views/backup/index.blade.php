@@ -8,7 +8,7 @@
             <div class="card-header">
                 <form action="{{ route('backup.create') }}" method="post">
                     @csrf
-                    <button type="submit"  {{ (url('/') == 'http://doctorat.test') ? '' : 'disabled'}} class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Create New Backup</button>
+                    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Create New Backup</button>
                 </form>
             </div>
             <div class="card-body">
