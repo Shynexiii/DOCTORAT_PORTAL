@@ -113,12 +113,12 @@
               <p>Users</p>
             </a>
           </li>
-          <li class="nav-item ">
+          {{-- <li class="nav-item ">
             <a href="{{route('roles.index')}}" class="nav-link {{ (request()->is('roles*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>Roles</p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{route('specialities.index')}}" class="nav-link {{ (request()->is('specialities*')) ? 'active' : '' }}">
               <i class="nav-icon fas fa-university"></i>

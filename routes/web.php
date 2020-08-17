@@ -40,13 +40,13 @@ Route::group(['middleware' => ['can:admin']], function () {
 
     
     //Role CRUD
-    Route::get('roles', 'Backend\User\RoleController@index')->name('roles.index');
+    /* Route::get('roles', 'Backend\User\RoleController@index')->name('roles.index');
     Route::get('roles/create', 'Backend\User\RoleController@create')->name('roles.create');
     Route::post('roles/store', 'Backend\User\RoleController@store')->name('roles.store');
     Route::get('roles/{role}', 'Backend\User\RoleController@show')->name('roles.show');
     Route::get('roles/{id}/edit', 'Backend\User\RoleController@edit')->name('roles.edit');
     Route::patch('roles/{id}', 'Backend\User\RoleController@update')->name('roles.update');
-    Route::delete('roles/{id}', 'Backend\User\RoleController@destroy')->name('roles.delete');
+    Route::delete('roles/{id}', 'Backend\User\RoleController@destroy')->name('roles.delete'); */
 
     //Students CRUD
   
