@@ -20,7 +20,7 @@
                 </form>
                 @endcan --}}
                 @can('admin')
-                <a href="" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
+                <a href="{{ route('students.download') }}" class="btn btn-info"><i class="fas fa-download"></i> Download excel</a>
                 @endcan
                 @can('admin')
                 <a href="{{route('students.pdf')}}" class="btn btn-info"><i class="fas fa-download"></i> Download PDF</a>
